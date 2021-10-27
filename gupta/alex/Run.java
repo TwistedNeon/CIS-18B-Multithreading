@@ -40,7 +40,6 @@ public class Run implements Runnable{
 				fileWriter = new BufferedWriter(new FileWriter(outputFile));
 				for(Animal thisAnimal : animalList) {
 					fileWriter.write("" + thisAnimal.getName() + " is a " + thisAnimal.getType() + "\n");
-					//System.out.println("" + thisAnimal.getName() + " is a " + thisAnimal.getType());
 				}
 					fileWriter.close();
 					System.out.println("Successfully outputted to file!\n" + outputFile.getAbsolutePath());

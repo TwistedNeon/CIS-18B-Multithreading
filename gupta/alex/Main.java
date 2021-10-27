@@ -17,35 +17,8 @@ public class Main {
 	private static ArrayList<Run> threadList = new ArrayList<Run>();
 
 	public static void main(String[] args) {
-		
 		getInput();
-		
-		for(int i = 0; i < input; i++) {
-			Run run = Run.createAndStart("thread" + i, "output" + i + ".txt", animalList);
-			threadList.add(run);
-		}
-		
-		for(int i = 0; i < input; i++) {
-			try {
-				threadList.get(i).getThread().join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		
-//		Run run0 = Run.createAndStart("thread0", "output0.txt", animalList);
-//		Run run1 = Run.createAndStart("thread1", "output1.txt", animalList);
-//		Run run2 = Run.createAndStart("thread2", "output2.txt", animalList);
-//		
-//		try {
-//			run0.getThread().join();
-//			run1.getThread().join();
-//			run2.getThread().join();
-//		} catch (InterruptedException e) {
-//			System.out.println("Error!");
-//		}
-		
-		
+		startThreads();
 	}
 	
 	//Ask user for input
@@ -80,6 +53,34 @@ public class Main {
 			}catch(Exception e) {
 				System.out.println("Error creating an animal!");
 			}
+		}
+		
+	//Create and start threads
+		private static void startThreads() {
+			for(int i = 0; i < input; i++) {
+				Run run = Run.createAndStart("thread" + i, "output" + i + ".txt", animalList);
+				threadList.add(run);
+			}
+			
+			for(int i = 0; i < input; i++) {
+				try {
+					threadList.get(i).getThread().join();
+				} catch (Exception e) {
+					System.out.println("Error creating, running or finishing threads!");
+				}
+			}
+			
+//			Run run0 = Run.createAndStart("thread0", "output0.txt", animalList);
+//			Run run1 = Run.createAndStart("thread1", "output1.txt", animalList);
+//			Run run2 = Run.createAndStart("thread2", "output2.txt", animalList);
+		
+//			try {
+//				run0.getThread().join();
+//				run1.getThread().join();
+//				run2.getThread().join();
+//			} catch (Exception e) {
+//				System.out.println("Error!");
+//			}
 		}
 	
 }
